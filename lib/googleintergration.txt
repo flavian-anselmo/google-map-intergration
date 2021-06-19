@@ -1,0 +1,62 @@
+*************how to intergrate google maps in flutter for delivery apps**********
+create and set up a new google cloud paltform
+
+Add Google Maps SDK (for both Android & iOS) and Directions API to the GCP project
+
+Create an API Key on GCP
+
+Setup Flutter project to use Google Maps
+
+Add Google Maps widget
+
+Use Geocoding to translate coordinates into a place address and vice versa
+
+Use Polylines for drawing route between two places
+
+Calculate distance of that route
+
+
+google maps widgets 
+initialCameraPosition: This is a required parameter that is used for loading the map view on initial start-up.
+
+myLocationEnabled: For showing your current location on the map with a blue dot.
+
+myLocationButtonEnabled: This button is used to bring the user location to the center of the camera view.
+
+mapType: For specifying the displayed map type (normal, satellite, hybrid or terrain).
+
+zoomGesturesEnabled: Whether the map view should respond to zoom gestures.
+
+zoomControlsEnabled: Whether to show zoom controls (only applicable for Android).
+
+onMapCreated: Callback for when the map is ready to use.
+
+
+geocoding 
+whenyou have the initial app and working you can move on adding two 
+places and finding the suitable route between them on the map 
+for this you will need the lattitude and the longitude of these places 
+since figuring out the geographic coordinates can pretty comlicateed we will use geocoding 
+
+geocoding is a technique by which the address of a place can be converted into coordinates 
+(lattitudes and viceversa )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
