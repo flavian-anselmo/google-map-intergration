@@ -1,8 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:googlemaps/components/constants.dart';
 import 'package:googlemaps/components/reusablemapbtns.dart';
+import 'package:googlemaps/getaddress.dart';
 import 'package:googlemaps/getlocation.dart';
 
 class MapScreenfromGoogle extends StatefulWidget {
@@ -13,6 +14,8 @@ class MapScreenfromGoogle extends StatefulWidget {
 }
 
 class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
+  GetAddressThroughGeoCoding a = GetAddressThroughGeoCoding();
+  final _globalFormKey = GlobalKey<FormState>();
   //location instance
   CheckLocationEnabled loc = new CheckLocationEnabled();
   //this are the location coordinates
@@ -24,6 +27,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     //get the location of the user as the application loads
     setState(() {
       getLocation();
+      a.getAddressFromCoordinates();
     });
   }
 
@@ -43,7 +47,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       lat = CheckLocationEnabled.lattitude;
       long = CheckLocationEnabled.longitude;
 
-      ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS 
+      ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -54,7 +58,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
               lat,
               long,
             ),
-            zoom: 20.0,
+            zoom: 15.0,
           ),
         ),
       );
@@ -67,6 +71,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     ///so that the google maps widget takes up the entire screen
     ///iam also using stack to keep google maps in the backgroung and
     ///add thoer necessary widgets on top of it
+    final startAddressController = TextEditingController();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -93,7 +98,23 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                 },
               ),
 
-              
+              Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: Form(
+                  key: _globalFormKey,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        controller: startAddressController,
+                        decoration: kinputDecoration,
+                        onChanged: (value) {
+                          //todo pick the user inputs to create routes and distance
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
               ///button ui imlimentation
               ///how the buttoon will look
