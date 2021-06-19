@@ -41,6 +41,12 @@ since figuring out the geographic coordinates can pretty comlicateed we will use
 geocoding is a technique by which the address of a place can be converted into coordinates 
 (lattitudes and viceversa )
 
+place markers 
+you can use the coordinates retrieved in the previous step to place markers on the map 
+have a var to store the markers 
+then create the markers 
+add the markers the display them in the map 
+
 
 
 

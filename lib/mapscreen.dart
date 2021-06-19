@@ -8,6 +8,7 @@ import 'package:googlemaps/getlocation.dart';
 
 //TEXT FIELD CONTROLLER
 final startAddressController = TextEditingController();
+
 GetAddressThroughGeoCoding geocodeAddress = GetAddressThroughGeoCoding();
 
 class MapScreenfromGoogle extends StatefulWidget {
@@ -70,6 +71,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     });
   }
 
+  
   @override
   Widget build(BuildContext context) {
     ///defined a container height and width to be the size of the screen
