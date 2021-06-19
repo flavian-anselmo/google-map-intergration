@@ -1,12 +1,12 @@
 # googlemaps
 
-A new Flutter project.
+How to intergrate google maps in a  Flutter project.
 
-## Getting Started
+# packages
+google_maps_flutter
+geocoding 
+polylines
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
