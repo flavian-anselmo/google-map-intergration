@@ -52,7 +52,6 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       //set the text name to the current location
       //startAddressController.text = a.currentAddress;
 
-
       ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
@@ -70,8 +69,6 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       );
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +115,8 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                         //initialValue:a.currentAddress,
                         onChanged: (value) {
                           //todo pick the user inputs to create routes and distance
+                          //this is where the user will input the start adress
+                          geocodeAddress.currentAddress = value;
                         },
                       ),
                       SizedBox(
@@ -129,6 +128,8 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                         //initialValue:startAddressController.text,
                         onChanged: (value) {
                           //todo pick the user inputs to create routes and distance
+                          //this where the user will input the destination address
+                          geocodeAddress.destinationAddress = value;
                         },
                       ),
                     ],
