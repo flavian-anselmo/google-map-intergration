@@ -8,6 +8,7 @@ import 'package:googlemaps/getlocation.dart';
 
 //TEXT FIELD CONTROLLER
 final startAddressController = TextEditingController();
+GetAddressThroughGeoCoding geocodeAddress = GetAddressThroughGeoCoding();
 
 class MapScreenfromGoogle extends StatefulWidget {
   MapScreenfromGoogle({Key? key}) : super(key: key);
@@ -17,7 +18,6 @@ class MapScreenfromGoogle extends StatefulWidget {
 }
 
 class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
-  GetAddressThroughGeoCoding a = GetAddressThroughGeoCoding();
   final _globalFormKey = GlobalKey<FormState>();
   //location instance
   CheckLocationEnabled loc = new CheckLocationEnabled();
@@ -48,9 +48,10 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       //using the exact coordinates
       lat = CheckLocationEnabled.lattitude;
       long = CheckLocationEnabled.longitude;
-      a.getAddressFromCoordinates(lat, long);
+      geocodeAddress.getAddressFromCoordinates(lat, long);
       //set the text name to the current location
-      startAddressController.text = a.currentAddress;
+      //startAddressController.text = a.currentAddress;
+
 
       ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS
       mapController.animateCamera(
@@ -69,6 +70,8 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       );
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +107,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(50.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Form(
                   key: _globalFormKey,
                   child: Column(
@@ -112,7 +115,18 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                       TextFormField(
                         controller: startAddressController,
                         decoration: kinputDecoration,
-                        initialValue: startAddressController.text,
+                        //initialValue:a.currentAddress,
+                        onChanged: (value) {
+                          //todo pick the user inputs to create routes and distance
+                        },
+                      ),
+                      SizedBox(
+                        height: 25.0,
+                      ),
+                      TextFormField(
+                        controller: startAddressController,
+                        decoration: kinputDecoration,
+                        //initialValue:startAddressController.text,
                         onChanged: (value) {
                           //todo pick the user inputs to create routes and distance
                         },

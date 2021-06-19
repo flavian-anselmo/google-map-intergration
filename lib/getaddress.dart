@@ -1,10 +1,11 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:googlemaps/getlocation.dart';
+import 'package:googlemaps/mapscreen.dart';
 
 class GetAddressThroughGeoCoding extends CheckLocationEnabled {
   //get the coordinates form the class tha handles that through inheritance
   late String currentAddress;
-  void getAddressFromCoordinates(double lat, double long) async {
+  Future<void> getAddressFromCoordinates(double lat, double long) async {
     //retrieve the address form the coordinates
     try {
       List<Placemark> address = await placemarkFromCoordinates(lat, long);
@@ -13,10 +14,29 @@ class GetAddressThroughGeoCoding extends CheckLocationEnabled {
 
       //address structure
       currentAddress =
-          "${place.name},${place.locality},${place.street}${place.postalCode}";
+          "${place.name},${place.locality},${place.subAdministrativeArea}";
+
       print(currentAddress);
+      //SET THE CURRENT ADREESS
+      startAddressController.text = currentAddress;
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> getCoordinatesFromAnGeocodedAddress(
+      String destinationAdress) async {
+    ///you can use a similar method to retrive the coordinates
+    ///from the starting address and the destination address
+    ///you need these coordinates to draw a route on the map and to place markers
+    List<Location> startPlaceMark = await locationFromAddress(currentAddress);
+    List<Location> destinationPlaceMark =
+        await locationFromAddress(destinationAdress);
+
+    ///store the longitudes and the lattitudes
+    double startLattitude = startPlaceMark[0].latitude;
+    double startLongitude = startPlaceMark[0].longitude;
+    double destLattitude = destinationPlaceMark[0].latitude;
+    double destLongitude = destinationPlaceMark[0].longitude;
   }
 }
