@@ -6,6 +6,9 @@ import 'package:googlemaps/components/reusablemapbtns.dart';
 import 'package:googlemaps/getaddress.dart';
 import 'package:googlemaps/getlocation.dart';
 
+//TEXT FIELD CONTROLLER
+final startAddressController = TextEditingController();
+
 class MapScreenfromGoogle extends StatefulWidget {
   MapScreenfromGoogle({Key? key}) : super(key: key);
 
@@ -27,7 +30,6 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     //get the location of the user as the application loads
     setState(() {
       getLocation();
-      a.getAddressFromCoordinates();
     });
   }
 
@@ -46,6 +48,9 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       //using the exact coordinates
       lat = CheckLocationEnabled.lattitude;
       long = CheckLocationEnabled.longitude;
+      a.getAddressFromCoordinates(lat, long);
+      //set the text name to the current location
+      startAddressController.text = a.currentAddress;
 
       ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS
       mapController.animateCamera(
@@ -71,7 +76,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     ///so that the google maps widget takes up the entire screen
     ///iam also using stack to keep google maps in the backgroung and
     ///add thoer necessary widgets on top of it
-    final startAddressController = TextEditingController();
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -107,6 +112,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                       TextFormField(
                         controller: startAddressController,
                         decoration: kinputDecoration,
+                        initialValue: startAddressController.text,
                         onChanged: (value) {
                           //todo pick the user inputs to create routes and distance
                         },
