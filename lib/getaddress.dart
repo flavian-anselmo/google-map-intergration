@@ -5,14 +5,14 @@ import 'package:googlemaps/mapscreen.dart';
 
 class GetAddressThroughGeoCoding extends CheckLocationEnabled {
   //get the coordinates form the class tha handles that through inheritance
-  late String currentAddress;
-  late String destinationAddress;
-  late double startLattitude;
-  late double startLongitude;
-  late double destLattitude;
-  late double destLongitude;
-  late String startCoordinatesString;
-  late String destinationCoordinatesString;
+  late String currentAddress = " ";
+  late String destinationAddress = " ";
+  late double startLattitude = 0.0;
+  late double startLongitude = 0.0;
+  late double destLattitude = 0.0;
+  late double destLongitude = 0.0;
+  late String startCoordinatesString = " ";
+  late String destinationCoordinatesString = " ";
   Future<void> getAddressFromCoordinates(double lat, double long) async {
     //retrieve the address form the coordinates
     try {
@@ -39,6 +39,7 @@ class GetAddressThroughGeoCoding extends CheckLocationEnabled {
     List<Location> startPlaceMark = await locationFromAddress(currentAddress);
     List<Location> destinationPlaceMark =
         await locationFromAddress(destinationAddress);
+    print(destinationPlaceMark);
 
     ///store the longitudes and the lattitudes
     startLattitude = startPlaceMark[0].latitude;
@@ -48,10 +49,14 @@ class GetAddressThroughGeoCoding extends CheckLocationEnabled {
 
     startCoordinatesString = '($startLattitude, $startLongitude)';
     destinationCoordinatesString = '($destLattitude, $destLongitude)';
+    print(destinationCoordinatesString);
+    print(startCoordinatesString);
   }
 }
 
 class CreateMarkers {
+  //THIS WILL STORE THE SIURCE MARKER
+
   Marker startPositionMarker = Marker(
     markerId: MarkerId(geocodeAddress.startCoordinatesString),
     position:

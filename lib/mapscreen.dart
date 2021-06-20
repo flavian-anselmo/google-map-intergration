@@ -23,6 +23,8 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
   //location instance
   CheckLocationEnabled loc = new CheckLocationEnabled();
   //this are the location coordinates
+  Set<Marker> areaMarkers = {}; //will store our markers
+  CreateMarkers storeMarkers = CreateMarkers();
   static double lat = 0.0;
   static double long = 0.0;
   @override
@@ -52,6 +54,8 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
       geocodeAddress.getAddressFromCoordinates(lat, long);
       //set the text name to the current location
       //startAddressController.text = a.currentAddress;
+      areaMarkers.add(storeMarkers.startPositionMarker);
+      areaMarkers.add(storeMarkers.destinationPositionMarker);
 
       ///MOVES THE MAP DIRECTLY TO YOUR LOCATION AS THE APP LOADS
       mapController.animateCamera(
@@ -71,7 +75,6 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
     });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     ///defined a container height and width to be the size of the screen
@@ -98,7 +101,9 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                 myLocationEnabled: true,
                 zoomGesturesEnabled: true,
                 zoomControlsEnabled: false,
-
+                //display the markers
+                //from our set of markers
+                markers: Set<Marker>.from(areaMarkers),
                 //this is the controler for the map on the screen
                 onMapCreated: (GoogleMapController controller) {
                   mapController = controller;
@@ -125,7 +130,7 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                         height: 25.0,
                       ),
                       TextFormField(
-                        controller: startAddressController,
+                        //controller: startAddressController,
                         decoration: kinputDecoration,
                         //initialValue:startAddressController.text,
                         onChanged: (value) {
@@ -133,6 +138,31 @@ class _MapScreenfromGoogleState extends State<MapScreenfromGoogle> {
                           //this where the user will input the destination address
                           geocodeAddress.destinationAddress = value;
                         },
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Material(
+                          elevation: 5.0,
+                          color: Colors.orange[50],
+                          borderRadius: BorderRadius.circular(30.0),
+                          child: MaterialButton(
+                            onPressed: () {
+                              //create routes and displaye the maekers
+                              setState(() {
+                                geocodeAddress
+                                    .getCoordinatesFromAnGeocodedAddress();
+                                //SET THE MARKERS HERE
+                                //store the markers in the set of markers
+                                //display the makrkers in the google map widget
+                              });
+                            },
+                            minWidth: 200.0,
+                            height: 42.0,
+                            child: Text(
+                              'Get route',
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
